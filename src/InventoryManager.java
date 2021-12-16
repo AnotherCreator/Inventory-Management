@@ -11,6 +11,8 @@ WEEK 15
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class InventoryManager {
     // MAIN LINE
@@ -62,24 +64,23 @@ public class InventoryManager {
 
     // FUNCTIONS
     public static void displayAddResult(Boolean boolCheck) {
-        if (boolCheck == true) {
-            System.out.println("\n===============================" +
-                               "\nSuccessfully added to inventory" +
-                               "\n===============================");
+        if (boolCheck) { // If True
+            System.out.println("""
+                    ===============================
+                    Successfully added to inventory
+                    ===============================""");
         }
         else {
-            System.out.println("\n==========================" +
-                               "\nFailed to add to inventory" +
-                               "\n==========================");
+            System.out.println("""
+                    ==========================
+                    Failed to add to inventory
+                    ==========================""");
         }
     }
 
     public static void readData(DataStructure bookCollection) throws FileNotFoundException {
-        // Variables
-        int i = 0;
-
         // Open file(s) for reading
-        File intData = new File("src\\assets\\books_new.txt");          
+        File intData = new File("src/assets/books_new.txt");
         Scanner fileReader = new Scanner(intData);                      
 
         while (fileReader.hasNextLine()) {                              
@@ -94,9 +95,7 @@ public class InventoryManager {
             newBook.setBookFormat(splitData[4]);                        
 
             newBook.setData(newBook);                                   
-            bookCollection.addBook(newBook);                            
-
-            i++;                                                        
+            bookCollection.addBook(newBook);
         }
         fileReader.close();
     }
